@@ -13,10 +13,6 @@
 
 A modern, responsive web application for reporting and visualizing disaster incidents on an interactive map. The application enables users to report emergencies with their live location, monitor ongoing incidents, and view real-time disaster reports through an intuitive dashboard.
 
-## 🚀 Live Demo
-
-🔗 https://your-vercel-url.vercel.app
-
 ---
 
 ## 📖 Overview
