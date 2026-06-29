@@ -1,5 +1,5 @@
 ## 📷 Screenshots
-<img width="1917" height="936" alt="homepage" src="https://github.com/user-attachments/assets/67ad2be1-a467-4430-9228-6c53ef2e4793" />
+<img width="620" height="800" alt="homepage" src="https://github.com/user-attachments/assets/67ad2be1-a467-4430-9228-6c53ef2e4793" />
 <img width="620" height="647" alt="report-incident" src="https://github.com/user-attachments/assets/75b4e73c-b7b6-48be-8d8c-2ebcea640fa2" />
 <img width="827" height="725" alt="safety-guide" src="https://github.com/user-attachments/assets/bd0e7fa9-8261-4134-856c-f9965094ad56" />
 
