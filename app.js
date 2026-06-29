@@ -21,14 +21,17 @@ function initIntroReveal() {
         textEl.appendChild(span);
     });
 
-    const wordElements = container.querySelectorAll('.word');
-
-    // Animate words in on load
-    gsap.fromTo(
-        wordElements,
-        { opacity: 0, filter: 'blur(12px)', y: 20 },
-        { ease: 'power2.out', opacity: 1, filter: 'blur(0px)', y: 0, stagger: 0.1, duration: 1, delay: 0.2 }
-    );
+    // Animate words in using CSS so there's zero dependency on GSAP loading
+    wordElements.forEach((word, i) => {
+        word.style.cssText = `
+            opacity: 0;
+            filter: blur(12px);
+            transform: translateY(20px);
+            display: inline-block;
+            animation: wordReveal 0.8s ease forwards;
+            animation-delay: ${0.2 + i * 0.12}s;
+        `;
+    });
 
     // --- Scroll detection via wheel + touch events on document ---
     // This is the most reliable approach: no scrollable div needed.
