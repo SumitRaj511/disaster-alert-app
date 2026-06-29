@@ -22,6 +22,7 @@ function initIntroReveal() {
     });
 
     // Animate words in using CSS so there's zero dependency on GSAP loading
+    const wordElements = textEl.querySelectorAll('.word');
     wordElements.forEach((word, i) => {
         word.style.cssText = `
             opacity: 0;
