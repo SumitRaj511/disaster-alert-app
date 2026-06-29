@@ -8,7 +8,7 @@ function initIntroReveal() {
     const text = textEl.textContent;
     const indicator = document.getElementById('scroll-indicator');
 
-    // Split text into words
+    // Split text into individual word spans for GSAP animation
     textEl.innerHTML = '';
     text.split(/(\s+)/).forEach(word => {
         if (word.match(/^\s+$/)) {
@@ -23,39 +23,65 @@ function initIntroReveal() {
 
     const wordElements = container.querySelectorAll('.word');
 
-    // Play text reveal animation automatically on page load
+    // Animate words in on load
     gsap.fromTo(
         wordElements,
         { opacity: 0, filter: 'blur(12px)', y: 20 },
         { ease: 'power2.out', opacity: 1, filter: 'blur(0px)', y: 0, stagger: 0.1, duration: 1, delay: 0.2 }
     );
 
-    // Vanilla scroll listener — works reliably on all browsers and hosts.
-    // introScreen is a fixed overlay with overflow-y: auto and a tall inner div (250vh),
-    // so scrollTop goes from 0 to (scrollHeight - clientHeight).
-    introScreen.addEventListener('scroll', () => {
-        const maxScroll = introScreen.scrollHeight - introScreen.clientHeight;
-        if (maxScroll <= 0) return;
+    // --- Scroll detection via wheel + touch events on document ---
+    // This is the most reliable approach: no scrollable div needed.
+    // We capture scroll intent and animate manually.
+    const SCROLL_NEEDED = 500; // total px of scroll to complete the transition
+    let accumulated = 0;
+    let done = false;
 
-        const progress = introScreen.scrollTop / maxScroll;
+    function applyProgress(delta) {
+        if (done) return;
+        accumulated = Math.min(SCROLL_NEEDED, accumulated + Math.max(0, delta));
+        const progress = accumulated / SCROLL_NEEDED;
 
-        // Fade + lift the title as user scrolls
-        const fadeOut = Math.max(0, 1 - progress * 2.5);
-        container.style.opacity = fadeOut;
-        container.style.transform = `translateY(${-progress * 100}px)`;
+        // Fade + lift title as scroll progresses
+        container.style.opacity = Math.max(0, 1 - progress * 2.5);
+        container.style.transform = `translateY(${-progress * 120}px)`;
 
-        // Hide the scroll indicator after 5% scroll
-        if (progress > 0.05) {
-            indicator.style.opacity = '0';
-        }
+        // Hide scroll indicator after slight scroll
+        if (progress > 0.05) indicator.style.opacity = '0';
 
-        // When scroll is ~80% complete, fade out and hide the entire intro screen
+        // At 80% scroll, fade out intro and show main app
         if (progress >= 0.8) {
-            introScreen.style.transition = 'opacity 0.6s ease-in-out, visibility 0.6s';
+            done = true;
+            introScreen.style.transition = 'opacity 0.5s ease-in-out, visibility 0.5s';
             introScreen.style.opacity = '0';
             introScreen.style.visibility = 'hidden';
+            document.removeEventListener('wheel', onWheel);
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchstart', onTouchStart);
         }
-    }, { passive: true });
+    }
+
+    // Mouse wheel / trackpad
+    function onWheel(e) {
+        e.preventDefault();
+        applyProgress(e.deltaY);
+    }
+
+    // Touch (mobile)
+    let touchStartY = 0;
+    function onTouchStart(e) {
+        touchStartY = e.touches[0].clientY;
+    }
+    function onTouchMove(e) {
+        e.preventDefault();
+        const delta = touchStartY - e.touches[0].clientY;
+        touchStartY = e.touches[0].clientY;
+        applyProgress(delta);
+    }
+
+    document.addEventListener('wheel', onWheel, { passive: false });
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
 }
 
 // Mock Data if localStorage is empty
