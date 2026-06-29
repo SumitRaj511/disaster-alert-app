@@ -3,11 +3,6 @@
   <img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" alt="Homepage" width="750">
 </p>
 
-
-
-
-
-
 # 🌍 Disaster Alert App
 
 A modern, responsive web application for reporting and visualizing disaster incidents on an interactive map. The application enables users to report emergencies with their live location, monitor ongoing incidents, and view real-time disaster reports through an intuitive dashboard.
@@ -164,39 +159,6 @@ This project helped in understanding:
 - Responsive Web Design
 - JavaScript Event Handling
 - Frontend Animations
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome.
-
-1. Fork the repository
-2. Create a feature branch
-
-```bash
-git checkout -b feature-name
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "Added new feature"
-```
-
-4. Push the branch
-
-```bash
-git push origin feature-name
-```
-
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ---
 
