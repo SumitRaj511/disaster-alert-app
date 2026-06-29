@@ -1,0 +1,80 @@
+/* Custom Styles */
+
+body {
+    background-color: #0a0a0a;
+}
+
+/* Clean scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Leaflet dark theme tweaks */
+.leaflet-container {
+    background: #1a1a1a;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+.leaflet-popup-tip {
+    background-color: #1a1a1a;
+}
+
+/* Scroll Reveal Styles */
+.scroll-reveal {
+    margin: 20px 0;
+}
+
+.scroll-reveal-text {
+    font-family: Impact, 'Arial Black', sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 1;
+    font-weight: 900;
+    text-align: center;
+    padding-bottom: 0.1em;
+    cursor: default;
+    color: white; /* Spotlight applies via mix-blend-mode in HTML */
+}
+
+.word {
+    display: inline-block;
+    padding-right: 0.2em;
+}
+
+/* --- Safety Guide Modal --- */
+.safety-tab {
+    border-left: 2px solid transparent;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.safety-tab:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.safety-tab.active {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: #f59e0b;
+    color: #ffffff;
+}
+
+.safety-section-icon {
+    width: 1.5rem;
+    text-align: center;
+}
