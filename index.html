@@ -52,10 +52,10 @@
         <div id="text-spotlight" class="fixed inset-0 pointer-events-none z-[210] mix-blend-multiply transition-opacity duration-500" style="background: radial-gradient(circle 250px at var(--mouse-x, 50%) var(--mouse-y, 50%), #ef4444 0%, #f59e0b 30%, #3b82f6 60%, #ffffff 100%);"></div>
 
         <!-- Spacer to allow scrolling -->
-        <div class="h-[250vh] w-full relative">
+        <div id="scroll-spacer" style="height: 250vh;" class="w-full relative">
             <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
                 <div class="text-center px-4">
-                    <h2 id="scroll-reveal-container" class="scroll-reveal">
+                    <h2 id="scroll-reveal-container" class="scroll-reveal" style="transition: opacity 0.1s ease-out, transform 0.1s ease-out;">
                         <p class="scroll-reveal-text">Disaster Alert</p>
                     </h2>
                     <div class="mt-16 animate-bounce opacity-50" id="scroll-indicator">

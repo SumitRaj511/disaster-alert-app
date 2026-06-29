@@ -1,7 +1,5 @@
 // --- Intro Scroll Reveal Logic ---
 function initIntroReveal() {
-    gsap.registerPlugin(ScrollTrigger);
-
     const introScreen = document.getElementById('intro-screen');
     if (!introScreen) return;
 
@@ -32,34 +30,32 @@ function initIntroReveal() {
         { ease: 'power2.out', opacity: 1, filter: 'blur(0px)', y: 0, stagger: 0.1, duration: 1, delay: 0.2 }
     );
 
-    // Timeline synced to scroll (only used to hide intro screen)
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            scroller: introScreen,
-            trigger: introScreen.querySelector('.h-\\[250vh\\]'),
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1,
-            onUpdate: (self) => {
-                if(self.progress > 0.05 && indicator.style.opacity !== '0') {
-                    gsap.to(indicator, { opacity: 0, duration: 0.3 });
-                }
-            },
-            onLeave: () => {
-                // Hide intro screen to reveal main app
-                introScreen.style.transition = "opacity 0.8s ease-in-out, visibility 0.8s";
-                introScreen.style.opacity = '0';
-                introScreen.style.visibility = 'hidden';
-            }
-        }
-    });
+    // Vanilla scroll listener — works reliably on all browsers and hosts.
+    // introScreen is a fixed overlay with overflow-y: auto and a tall inner div (250vh),
+    // so scrollTop goes from 0 to (scrollHeight - clientHeight).
+    introScreen.addEventListener('scroll', () => {
+        const maxScroll = introScreen.scrollHeight - introScreen.clientHeight;
+        if (maxScroll <= 0) return;
 
-    // Fade out text as user scrolls down
-    tl.to(
-        container,
-        { opacity: 0, y: -100, duration: 1 },
-        0
-    );
+        const progress = introScreen.scrollTop / maxScroll;
+
+        // Fade + lift the title as user scrolls
+        const fadeOut = Math.max(0, 1 - progress * 2.5);
+        container.style.opacity = fadeOut;
+        container.style.transform = `translateY(${-progress * 100}px)`;
+
+        // Hide the scroll indicator after 5% scroll
+        if (progress > 0.05) {
+            indicator.style.opacity = '0';
+        }
+
+        // When scroll is ~80% complete, fade out and hide the entire intro screen
+        if (progress >= 0.8) {
+            introScreen.style.transition = 'opacity 0.6s ease-in-out, visibility 0.6s';
+            introScreen.style.opacity = '0';
+            introScreen.style.visibility = 'hidden';
+        }
+    }, { passive: true });
 }
 
 // Mock Data if localStorage is empty
