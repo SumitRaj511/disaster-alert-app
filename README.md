@@ -12,6 +12,7 @@
   &nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" alt="Safety Guide" width="400">
 </p>
+
 ---
 
 # 🌍 Disaster Alert App
