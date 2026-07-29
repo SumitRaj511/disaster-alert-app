@@ -2,8 +2,6 @@
 <p align="center">
   <img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" alt="Homepage" width="750">
 </p>
-
-  <p align="center">
   <img src="https://github.com/user-attachments/assets/879ee511-14d0-458f-bc3b-2e5aeb8ffe0b"
        alt="Report Incident"
        width="350">
