@@ -88,29 +88,7 @@ function initIntroReveal() {
     document.addEventListener('touchmove', onTouchMove, { passive: false });
 }
 
-// Mock Data if localStorage is empty
-const defaultReports = [
-    {
-        id: "1",
-        type: "Fire",
-        description: "Large brush fire spreading quickly near the highway.",
-        latitude: 28.6139,
-        longitude: 77.2090,
-        address: "New Delhi, India",
-        severity: "Critical",
-        createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString() // 30 mins ago
-    },
-    {
-        id: "2",
-        type: "Flood",
-        description: "Heavy rains caused the river to overflow.",
-        latitude: 19.0760,
-        longitude: 72.8777,
-        address: "Mumbai, India",
-        severity: "High",
-        createdAt: new Date(Date.now() - 1000 * 60 * 120).toISOString() // 2 hours ago
-    }
-];
+// Mock Data removed in favor of Database
 
 // --- Safety Guide Data ---
 // General public safety guidance per disaster type. Keys must match the
@@ -265,8 +243,8 @@ const safetyGuide = {
 
 const safetyDisasterOrder = ['Fire', 'Flood', 'Theft', 'Bomb', 'Earthquake', 'Accident', 'Other'];
 
-// Initialize State from LocalStorage
-let reports = JSON.parse(localStorage.getItem('disaster_reports')) || defaultReports;
+// Initialize State
+let reports = [];
 let map;
 let currentLocation = null;
 let activeSafetyType = 'Fire';
@@ -611,10 +589,14 @@ getLocationBtn.addEventListener('click', () => {
 });
 
 // --- Form Submission ---
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     if (!currentLocation) return;
+
+    submitBtn.disabled = true;
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
 
     const newReport = {
         id: Date.now().toString(),
@@ -627,32 +609,64 @@ form.addEventListener('submit', (e) => {
         createdAt: new Date().toISOString()
     };
 
-    // Add to state
-    reports.unshift(newReport); // Add to beginning
-    
-    // Save to local storage
-    localStorage.setItem('disaster_reports', JSON.stringify(reports));
+    try {
+        const response = await fetch('/api/reports', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newReport)
+        });
 
-    // Update UI
-    renderMarkers();
-    renderFeed();
-    
-    // Pan map to new report
-    map.flyTo([newReport.latitude, newReport.longitude], 10);
+        if (!response.ok) {
+            throw new Error('Failed to submit report');
+        }
 
-    closeModal();
+        const result = await response.json();
+        
+        // Add to state
+        reports.unshift(result.data); // Add to beginning
 
-    // Surface relevant safety tips right after a report is filed
-    openSafetyModal(newReport.type);
+        // Update UI
+        renderMarkers();
+        renderFeed();
+        
+        // Pan map to new report
+        if (map) {
+            map.flyTo([result.data.latitude, result.data.longitude], 10);
+        }
+
+        closeModal();
+
+        // Surface relevant safety tips right after a report is filed
+        openSafetyModal(result.data.type);
+    } catch (error) {
+        console.error('Error submitting report:', error);
+        alert('There was an error submitting your report. Please try again.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+    }
 });
 
 // --- Init App ---
-window.onload = () => {
+window.onload = async () => {
     initIntroReveal();
-    initMap();
-    renderFeed();
     renderSafetyTabs();
     renderSafetyContent();
+
+    try {
+        const response = await fetch('/api/reports');
+        const result = await response.json();
+        if (result.data) {
+            reports = result.data;
+        }
+    } catch (error) {
+        console.error('Error fetching reports:', error);
+    }
+
+    initMap();
+    renderFeed();
     
     // Update timestamps dynamically
     setInterval(renderFeed, 60000);
