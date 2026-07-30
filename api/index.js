@@ -10,13 +10,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection
+// MongoDB Connection Options
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/disaster-alert';
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 3000 }) // fail quickly if DB is unreachable
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
+
+// Middleware to check DB connection
+app.use((req, res, next) => {
+    if (mongoose.connection.readyState !== 1) {
+        return res.status(503).json({ error: "Database not connected. Please ensure MongoDB is running or MONGODB_URI is set correctly." });
+    }
+    next();
+});
 
 // Get all reports
 app.get('/api/reports', async (req, res) => {
