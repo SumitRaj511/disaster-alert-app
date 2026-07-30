@@ -240,8 +240,6 @@ http://localhost:3000
 
 ---
 
----
-
 # 📚 Learning Outcomes
 
 This project helped in understanding:
@@ -260,8 +258,6 @@ This project helped in understanding:
 - Backend Deployment
 - Environment Variables
 - Client-Server Architecture
-  
----
 
 ---
 
@@ -280,8 +276,6 @@ https://www.linkedin.com/in/sumitraj511/
 # ⭐ Support
 
 If you found this project useful, please consider giving it a ⭐ on GitHub.
-
-It helps others discover the project and motivates further development.
 
 ---
 
