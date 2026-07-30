@@ -212,19 +212,6 @@ Visit
 ```
 http://localhost:3000
 ```
-
----
-
-# 🚀 Deployment
-
-The project can be deployed on
-
-- Vercel
-- Render
-- Railway
-- Netlify (Frontend)
-- GitHub Pages (Frontend Only)
-
 ---
 
 # 📷 Screenshots
@@ -250,6 +237,7 @@ The project can be deployed on
 <p align="center">
 <img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" width="400">
 </p>
+
 ---
 
 ---
@@ -272,33 +260,8 @@ This project helped in understanding:
 - Backend Deployment
 - Environment Variables
 - Client-Server Architecture
-
+  
 ---
-
-# 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository
-2. Create your feature branch
-
-```bash
-git checkout -b feature-name
-```
-
-3. Commit your changes
-
-```bash
-git commit -m "Add new feature"
-```
-
-4. Push to your branch
-
-```bash
-git push origin feature-name
-```
-
-5. Open a Pull Request
 
 ---
 
