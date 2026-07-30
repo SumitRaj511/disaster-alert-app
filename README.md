@@ -2,18 +2,6 @@
  https://disaster-alert.vercel.app/
 
 ---
-## 📷 Screenshots
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" alt="Homepage" width="750">
-</p>
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/879ee511-14d0-458f-bc3b-2e5aeb8ffe0b" alt="Report Incident" width="400">
-  &nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" alt="Safety Guide" width="400">
-</p>
-
----
 
 # 🌍 Disaster Alert App
 
@@ -127,17 +115,15 @@ The project can be deployed easily on:
 ---
 
 ## 📷 Screenshots
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" alt="Homepage" width="750">
+</p>
 
-> Add screenshots here after uploading your project.
-
-Example:
-
-```
-screenshots/
-├── homepage.png
-├── map.png
-├── report-modal.png
-```
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/879ee511-14d0-458f-bc3b-2e5aeb8ffe0b" alt="Report Incident" width="400">
+  &nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" alt="Safety Guide" width="400">
+</p>
 
 ---
 
