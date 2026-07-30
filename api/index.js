@@ -16,28 +16,53 @@ mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 3000 }) // fail quickl
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Routes
-
-// Middleware to check DB connection
-app.use((req, res, next) => {
-    if (mongoose.connection.readyState !== 1) {
-        return res.status(503).json({ error: "Database not connected. Please ensure MongoDB is running or MONGODB_URI is set correctly." });
+// In-memory Database Fallback for Vercel
+let memoryReports = [
+    {
+        id: "1",
+        type: "Fire",
+        description: "Large brush fire spreading quickly near the highway.",
+        latitude: 28.6139,
+        longitude: 77.2090,
+        address: "New Delhi, India",
+        severity: "Critical",
+        createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString() // 30 mins ago
+    },
+    {
+        id: "2",
+        type: "Flood",
+        description: "Heavy rains caused the river to overflow.",
+        latitude: 19.0760,
+        longitude: 72.8777,
+        address: "Mumbai, India",
+        severity: "High",
+        createdAt: new Date(Date.now() - 1000 * 60 * 120).toISOString() // 2 hours ago
     }
-    next();
-});
+];
+
+// Routes
 
 // Get all reports
 app.get('/api/reports', async (req, res) => {
-    try {
-        const reports = await Report.find().sort({ createdAt: -1 });
-        res.json({
-            message: "success",
-            data: reports
-        });
-    } catch (err) {
-        console.error("Error fetching reports:", err);
-        res.status(500).json({ error: "Server error fetching reports" });
+    // If DB is connected, fetch from DB
+    if (mongoose.connection.readyState === 1) {
+        try {
+            const reports = await Report.find().sort({ createdAt: -1 });
+            return res.json({
+                message: "success",
+                data: reports
+            });
+        } catch (err) {
+            console.error("Error fetching reports from DB:", err);
+            // Fallthrough to memory fallback if DB query fails
+        }
     }
+    
+    // Fallback to in-memory array if DB is not connected
+    res.json({
+        message: "success (fallback)",
+        data: memoryReports
+    });
 });
 
 // Add a new report
@@ -49,18 +74,30 @@ app.post('/api/reports', async (req, res) => {
         return res.status(400).json({ error: "Missing required fields" });
     }
 
-    try {
-        const newReport = new Report({ id, type, severity, description, latitude, longitude, address, createdAt });
-        await newReport.save();
-        
-        res.json({
-            message: "success",
-            data: newReport
-        });
-    } catch (err) {
-        console.error("Error saving report:", err);
-        res.status(500).json({ error: "Server error saving report" });
+    const reportData = { id, type, severity, description, latitude, longitude, address, createdAt };
+
+    // If DB is connected, save to DB
+    if (mongoose.connection.readyState === 1) {
+        try {
+            const newReport = new Report(reportData);
+            await newReport.save();
+            
+            return res.json({
+                message: "success",
+                data: newReport
+            });
+        } catch (err) {
+            console.error("Error saving report to DB:", err);
+            // Fallthrough to memory fallback if DB query fails
+        }
     }
+    
+    // Fallback to in-memory array if DB is not connected
+    memoryReports.unshift(reportData);
+    res.json({
+        message: "success (fallback)",
+        data: reportData
+    });
 });
 
 // Export the Express API for Vercel
