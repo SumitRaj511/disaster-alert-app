@@ -171,39 +171,6 @@ disaster-alert-app/
 
 ---
 
-# 📡 REST API
-
-## Get All Reports
-
-```http
-GET /api/reports
-```
-
-Returns all disaster reports.
-
----
-
-## Create Report
-
-```http
-POST /api/reports
-```
-
-### Request Body
-
-```json
-{
-  "type": "Fire",
-  "severity": "High",
-  "description": "Forest fire near highway",
-  "latitude": 12.9716,
-  "longitude": 77.5946,
-  "address": "Bangalore"
-}
-```
-
----
-
 # ⚙ Installation
 
 ## Clone Repository
@@ -222,17 +189,6 @@ cd disaster-alert-app
 
 ```bash
 npm install
-```
-
----
-
-# 🔑 Environment Variables
-
-Create a `.env` file in the root directory.
-
-```env
-MONGODB_URI=your_mongodb_connection_string
-PORT=3000
 ```
 
 ---
@@ -294,23 +250,7 @@ The project can be deployed on
 <p align="center">
 <img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" width="400">
 </p>
-
 ---
-
-# 🎯 Future Enhancements
-
-- User Authentication
-- Role-based Access Control
-- Admin Dashboard
-- Real-time Notifications
-- Push Notifications
-- Weather API Integration
-- Image Uploads
-- AI-based Disaster Prediction
-- Emergency Contact Alerts
-- Email Notifications
-- Analytics Dashboard
-- Mobile App Support
 
 ---
 
