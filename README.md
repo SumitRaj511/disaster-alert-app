@@ -1,169 +1,387 @@
-
-# 🚀 Live demo
- https://disaster-alert.vercel.app/
-
----
-
 # 🌍 Disaster Alert App
 
-A modern, responsive web application for reporting and visualizing disaster incidents on an interactive map. The application enables users to report emergencies with their live location, monitor ongoing incidents, and view real-time disaster reports through an intuitive dashboard.
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-green?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Database-MongoDB-success?style=for-the-badge">
+  <img src="https://img.shields.io/badge/API-REST-orange?style=for-the-badge">
+  <img src="https://img.shields.io/badge/License-MIT-red?style=for-the-badge">
+</p>
+
+<p align="center">
+A full-stack disaster reporting and visualization platform that enables users to report emergency incidents, visualize them on an interactive map, and manage disaster reports through a REST API backed by MongoDB.
+</p>
 
 ---
 
-## 📖 Overview
+# 🚀 Live Demo
 
-The Disaster Alert App is a frontend web application designed to improve disaster awareness by allowing users to:
-
-- Report disasters using their current GPS location.
-- Visualize incidents on an interactive map.
-- View a live feed of reported disasters.
-- Store reports locally using browser Local Storage.
-- Experience smooth animations and a modern UI.
+### https://disaster-alert.vercel.app/
 
 ---
 
-## ✨ Features
+# 📖 Overview
 
-- 🌍 Interactive map powered by Leaflet.js
-- 📍 Live location detection using Geolocation API
-- 📝 Report disasters with severity levels
-- 🔥 Supports multiple disaster types
-  - Fire
-  - Flood
-  - Earthquake
-  - Theft
-  - Bomb
-  - Accident
-  - Other
-- 📡 Reverse geocoding using OpenStreetMap (Nominatim API)
-- 📢 Live incident feed
-- 💾 Local Storage support (reports persist after refresh)
-- 🎨 Modern responsive UI built with Tailwind CSS
-- ✨ GSAP powered intro animations
-- 🌙 Dark themed interface
+Disaster Alert App is a modern full-stack web application designed to improve disaster awareness and emergency reporting. Users can report incidents using their live location, visualize disaster reports on an interactive map, and access real-time data through a backend API.
+
+The application combines a responsive frontend with an Express.js backend and MongoDB database, providing persistent storage and scalable REST APIs.
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
 
-### Frontend
+## 🌍 Interactive Disaster Map
+
+- Interactive map powered by Leaflet.js
+- Live incident visualization
+- Clickable map markers
+- Auto-centering based on user location
+
+## 📍 Live Location Detection
+
+- Browser Geolocation API
+- Automatic latitude & longitude detection
+- Reverse geocoding using OpenStreetMap
+
+## 📝 Disaster Reporting
+
+Users can report:
+
+- 🔥 Fire
+- 🌊 Flood
+- 🌍 Earthquake
+- 🚨 Theft
+- 💣 Bomb Threat
+- 🚗 Accident
+- 📌 Other Emergencies
+
+Each report contains:
+
+- Disaster Type
+- Severity Level
+- Description
+- Coordinates
+- Address
+- Timestamp
+
+---
+
+# ⚡ Backend Features
+
+- Express.js REST API
+- MongoDB Database Integration
+- Mongoose ODM
+- Persistent Disaster Reports
+- JSON-based APIs
+- CORS Enabled
+- Error Handling
+- Environment Variable Support
+
+---
+
+# 🗄 Database
+
+The application uses **MongoDB** to permanently store disaster reports.
+
+Each report contains:
+
+- Report ID
+- Disaster Type
+- Severity
+- Description
+- Latitude
+- Longitude
+- Address
+- Created Time
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
 
 - HTML5
 - CSS3
 - JavaScript (ES6)
-
-### Libraries
-
 - Tailwind CSS
+
+## Backend
+
+- Node.js
+- Express.js
+
+## Database
+
+- MongoDB
+- Mongoose
+
+## Libraries
+
 - Leaflet.js
 - GSAP
 - Font Awesome
+- CORS
 
-### APIs
+## APIs
 
-- Geolocation API
-- OpenStreetMap Nominatim Reverse Geocoding API
+- Browser Geolocation API
+- OpenStreetMap
+- Nominatim Reverse Geocoding API
 
 ---
 
-## 📂 Project Structure
+# 🏗 Project Architecture
 
 ```
-Disaster-Alert-App/
+                 User
+                   │
+                   ▼
+        Frontend (HTML/CSS/JS)
+                   │
+                   ▼
+          Express REST API
+                   │
+                   ▼
+              MongoDB Database
+```
+
+---
+
+# 📂 Project Structure
+
+```
+disaster-alert-app/
 │
-├── index.html
-├── style.css
-├── app.js
+├── public/
+│   ├── index.html
+│   ├── app.js
+│   ├── style.css
+│   └── assets/
+│
+├── api/
+│   ├── routes/
+│   ├── models/
+│   ├── config/
+│   └── index.js
+│
+├── package.json
+├── .env
 └── README.md
 ```
 
 ---
 
-## ⚙️ Installation
+# 📡 REST API
 
-Clone the repository
+## Get All Reports
+
+```http
+GET /api/reports
+```
+
+Returns all disaster reports.
+
+---
+
+## Create Report
+
+```http
+POST /api/reports
+```
+
+### Request Body
+
+```json
+{
+  "type": "Fire",
+  "severity": "High",
+  "description": "Forest fire near highway",
+  "latitude": 12.9716,
+  "longitude": 77.5946,
+  "address": "Bangalore"
+}
+```
+
+---
+
+# ⚙ Installation
+
+## Clone Repository
 
 ```bash
 git clone https://github.com/SumitRaj511/disaster-alert-app.git
 ```
 
-Go to the project folder
+## Navigate to Project
 
 ```bash
 cd disaster-alert-app
 ```
 
-Open
+## Install Dependencies
 
+```bash
+npm install
 ```
-index.html
-```
-
-using any modern browser.
-
-No installation or package manager is required.
 
 ---
 
-## 🚀 Deployment
+# 🔑 Environment Variables
 
-The project can be deployed easily on:
+Create a `.env` file in the root directory.
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+PORT=3000
+```
+
+---
+
+# ▶ Running the Project
+
+Start the backend server
+
+```bash
+npm start
+```
+
+or
+
+```bash
+node server.js
+```
+
+Visit
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🚀 Deployment
+
+The project can be deployed on
 
 - Vercel
-- Netlify
-- GitHub Pages
+- Render
+- Railway
+- Netlify (Frontend)
+- GitHub Pages (Frontend Only)
 
 ---
 
-## 📷 Screenshots
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" alt="Homepage" width="750">
-</p>
+# 📷 Screenshots
+
+## Home Page
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/879ee511-14d0-458f-bc3b-2e5aeb8ffe0b" alt="Report Incident" width="400">
-  &nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" alt="Safety Guide" width="400">
+<img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" width="850">
 </p>
 
 ---
 
-## 🎯 Future Improvements
+## Report Disaster
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/879ee511-14d0-458f-bc3b-2e5aeb8ffe0b" width="400">
+</p>
+
+---
+
+## Safety Guide
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" width="400">
+</p>
+
+---
+
+# 🎯 Future Enhancements
 
 - User Authentication
-- Firebase Database Integration
+- Role-based Access Control
+- Admin Dashboard
 - Real-time Notifications
+- Push Notifications
+- Weather API Integration
+- Image Uploads
 - AI-based Disaster Prediction
 - Emergency Contact Alerts
-- Image Upload Support
-- Admin Dashboard
-- Weather API Integration
-- Push Notifications
+- Email Notifications
+- Analytics Dashboard
+- Mobile App Support
 
 ---
 
-## 📚 Learning Outcomes
+# 📚 Learning Outcomes
 
 This project helped in understanding:
 
-- DOM Manipulation
-- Local Storage
+- Full Stack Web Development
+- REST API Design
+- MongoDB Database Integration
+- Mongoose ODM
+- CRUD Operations
+- API Communication
 - Browser Geolocation
 - Interactive Maps
-- API Integration
-- Responsive Web Design
-- JavaScript Event Handling
+- Reverse Geocoding
+- Responsive UI Design
 - Frontend Animations
+- Backend Deployment
+- Environment Variables
+- Client-Server Architecture
 
 ---
 
-## 👨‍💻 Author
+# 🤝 Contributing
 
-**Sumit Raj**
+Contributions are welcome!
 
-- GitHub: https://github.com/SumitRaj511
-- LinkedIn: https://www.linkedin.com/in/sumitraj511/
+1. Fork the repository
+2. Create your feature branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to your branch
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
 
 ---
 
-⭐ If you found this project useful, consider giving it a Star!
+# 👨‍💻 Author
+
+## Sumit Raj
+
+GitHub:
+https://github.com/SumitRaj511
+
+LinkedIn:
+https://www.linkedin.com/in/sumitraj511/
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+It helps others discover the project and motivates further development.
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.
