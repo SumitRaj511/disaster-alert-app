@@ -28,6 +28,32 @@ The application combines a responsive frontend with an Express.js backend and Mo
 
 ---
 
+# 📷 Screenshots
+
+## Home Page
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" width="850">
+</p>
+
+---
+
+## Report Disaster
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/879ee511-14d0-458f-bc3b-2e5aeb8ffe0b" width="400">
+</p>
+
+---
+
+## Safety Guide
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" width="400">
+</p>
+
+---
+
 # ✨ Features
 
 ## 🌍 Interactive Disaster Map
@@ -212,32 +238,6 @@ Visit
 ```
 http://localhost:3000
 ```
----
-
-# 📷 Screenshots
-
-## Home Page
-
-<p align="center">
-<img src="https://github.com/user-attachments/assets/869a149c-79d9-47ec-bd0b-15af8af41f6c" width="850">
-</p>
-
----
-
-## Report Disaster
-
-<p align="center">
-<img src="https://github.com/user-attachments/assets/879ee511-14d0-458f-bc3b-2e5aeb8ffe0b" width="400">
-</p>
-
----
-
-## Safety Guide
-
-<p align="center">
-<img src="https://github.com/user-attachments/assets/dea0d84a-0318-42ab-afe7-ab64b2300503" width="400">
-</p>
-
 ---
 
 # 📚 Learning Outcomes
