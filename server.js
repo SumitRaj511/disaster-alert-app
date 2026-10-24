@@ -5,8 +5,8 @@ const app = require('./api/index');
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Fallback to index.html for any other routes
-app.get('/(.*)', (req, res) => {
+// Fallback to index.html for any other routes (Express 5 compatible)
+app.get('/*splat', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
